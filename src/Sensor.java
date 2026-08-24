@@ -82,4 +82,13 @@ public abstract class Sensor {
         }
         return EstadoSensor.OPERATIVO;
     }
+
+    public boolean esCritico() {
+        if (errorLectura || evaluarEstado() == EstadoSensor.FUERA_DE_RANGO) {
+            return true;
+        }
+        return lecturaTomada && esUmbralCritico();
+    }
+
+    protected abstract boolean esUmbralCritico();
 }
